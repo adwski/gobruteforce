@@ -27,6 +27,8 @@ func (wl WordList) Gen(cfg generators.GeneratorConfig, suggestions chan<- string
 	}
 
 	if err := scanner.Err(); err != nil {
-		cfg.Log.Fatal(err)
+		cfg.Log.Print(err)
 	}
+
+	done <- struct{}{}
 }

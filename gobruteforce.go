@@ -58,11 +58,10 @@ loop:
 			// some tryer finished
 			sFinished++
 			r.Log.Printf("generators finished: %d", sFinished)
-			if sFinished == r.GCfg.Count {
+			if sFinished >= r.GCfg.Count {
 				log.Print("all generators finished")
 				// Sleep for the case when last suggestion is successful
 				time.Sleep(time.Second)
-				log.Print("")
 				break loop
 			}
 		case sccss := <-success:
@@ -75,7 +74,7 @@ loop:
 			// some tryer finished
 			wFinished++
 			r.Log.Printf("tryers finished: %d", wFinished)
-			if wFinished == r.TCfg.Count {
+			if wFinished >= r.TCfg.Count {
 				// should never happen actually
 				log.Print("all tryers finished")
 				break loop
